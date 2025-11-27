@@ -2,6 +2,9 @@
 
 Desenvolvido por: Guilherme Garcia [a22409129]
 
+## Modelo UML
+- [models.md](https://github.com/GmsGarcia/proc-img-projeto/blob/master/model/model.md)
+
 # Tabela de resumo
 
 | Tema                                         | Gestor de Tarefas                                                                                                                              |
