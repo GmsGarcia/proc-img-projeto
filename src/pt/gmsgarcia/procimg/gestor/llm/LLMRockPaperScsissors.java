@@ -1,7 +1,5 @@
 package pt.gmsgarcia.procimg.gestor.llm;
 
-import pt.gmsgarcia.procimg.gestor.Utils;
-
 import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;

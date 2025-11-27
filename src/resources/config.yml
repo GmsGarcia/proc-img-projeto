@@ -1,0 +1,11 @@
+storage:
+  type: "mysql" # mysql or yaml
+  mysql:
+    host: "localhost"
+    port: "3306"
+    database: "proc_img"
+    user: "root"
+    password: ""
+  yaml:
+    path: "storage"
+    filename: "%UUID%.yml"

@@ -1,4 +1,4 @@
-package pt.gmsgarcia.procimg.gestor;
+package pt.gmsgarcia.procimg.gestor.llm;
 
 import java.util.Scanner;
 
