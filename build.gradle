@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'pt.gmsgarcia.pi.gestor'
+version = '1.0-SNAPSHOT'
+
+application {
+    mainClass = 'pt.gmsgarcia.pi.gestor.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.yaml:snakeyaml:2.2'
+    implementation 'com.formdev:flatlaf:3.7'
+    implementation 'com.formdev:flatlaf-intellij-themes:3.7'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
