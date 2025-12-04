@@ -8,25 +8,33 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class TaskManager {
-    private final HashMap<UUID, ArrayList<Task>> tasks;
+    private static HashMap<UUID, ArrayList<Task>> tasks = new HashMap<>();
 
-    public TaskManager() {
-        this.tasks = StorageManager.loadTasks();
+    public static void init() {
+        tasks = StorageManager.loadTasks();
     }
 
-    public Task createTask(UUID user, String title, String description, int priority, Instant deadline) {
-        Task task = new Task(UUID.randomUUID(), title, description, priority, deadline, TaskStatus.CREATED, new ArrayList<>());
+    public static ArrayList<Task> getTasks(UUID user) {
+        return tasks.get(user);
+    }
 
-        if (!this.tasks.containsKey(user)) {
-            this.tasks.put(user, new ArrayList<>());
+    public static Task createTask(UUID user, String title, String description, int priority, Instant deadline, ArrayList<TaskItem> items) {
+        Task task = new Task(UUID.randomUUID(), title, description, priority, deadline, TaskStatus.UNFINISHED, items);
+
+        if (!tasks.containsKey(user)) {
+            tasks.put(user, new ArrayList<>());
         }
 
-        this.tasks.get(user).add(task);
+        tasks.get(user).add(task);
 
         return task;
     }
 
-    public void saveTasks() {
+    public static void removeTask(UUID user, Task task) {
+        tasks.get(user).remove(task);
+    }
+
+    public static void saveTasks() {
         StorageManager.saveTasks(tasks);
     }
 }
