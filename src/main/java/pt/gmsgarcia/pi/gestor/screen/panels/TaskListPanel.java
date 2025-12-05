@@ -21,6 +21,8 @@ public class TaskListPanel extends JPanel {
         tasksList = new JPanel();
         tasksList.setLayout(new BoxLayout(tasksList, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(tasksList);
+        scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         this.add(scrollPane, BorderLayout.CENTER);
 
         this.setContent();

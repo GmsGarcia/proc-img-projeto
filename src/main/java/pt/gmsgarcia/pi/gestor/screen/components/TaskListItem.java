@@ -10,9 +10,9 @@ import java.awt.*;
 public class TaskListItem extends JPanel {
     public TaskListItem(Task task) {
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 70));
-        this.setMinimumSize(new Dimension(0, 70));
-        this.setPreferredSize(new Dimension(0, 70));
+        this.setMaximumSize(new Dimension(Integer.MAX_VALUE, 85));
+        this.setMinimumSize(new Dimension(0, 85));
+        this.setPreferredSize(new Dimension(0, 85));
         this.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.setBorder(new EmptyBorder(0, 15, 0, 15));
 
@@ -21,15 +21,15 @@ public class TaskListItem extends JPanel {
         taskInfo.setOpaque(false);
 
         JLabel title = new JLabel(task.getTitle());
-        title.setFont(new Font("Aria", Font.BOLD, 18));
+        title.setFont(new Font("Satoshi Variable Bold", Font.BOLD, 18));
         taskInfo.add(title);
 
-        JLabel deadline = new JLabel("Deadline: " + task.getDeadlineString());
-        deadline.setFont(new Font("Aria", Font.BOLD, 14));
+        JLabel deadline = new JLabel("<html><b>Deadline:</b> " + task.getDeadlineString() + "</html>");
+        deadline.setFont(new Font("Satoshi Variable Bold", Font.PLAIN, 14));
         taskInfo.add(deadline);
 
         JLabel priority = new JLabel("Prioridade: " + task.getPriority());
-        priority.setFont(new Font("Aria", Font.BOLD, 14));
+        priority.setFont(new Font("Satoshi Variable Bold", Font.PLAIN, 14));
         taskInfo.add(priority);
 
 

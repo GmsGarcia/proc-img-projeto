@@ -1,9 +1,11 @@
 package pt.gmsgarcia.pi.gestor.task;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Task {
@@ -47,7 +49,36 @@ public class Task {
 
     public String getDeadlineString() {
         ZonedDateTime dateTime = this.deadline.atZone(ZoneId.systemDefault());
-        return dateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        ZonedDateTime now = ZonedDateTime.now();
+
+        LocalDate deadlineDate = dateTime.toLocalDate();
+        LocalDate today = now.toLocalDate();
+
+        long daysDiff = ChronoUnit.DAYS.between(today, deadlineDate);
+
+        // Time string only for today/tomorrow/yesterday
+        String time = dateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        if (daysDiff == 0) {
+            return "Today at " + time;
+        }
+        if (daysDiff == 1) {
+            return "Tomorrow at " + time;
+        }
+        if (daysDiff == -1) {
+            return "Yesterday at " + time;
+        }
+
+        // Otherwise show date only
+        int year = deadlineDate.getYear();
+        int currentYear = today.getYear();
+
+        DateTimeFormatter sameYear = DateTimeFormatter.ofPattern("dd/MM", Locale.ENGLISH);
+        DateTimeFormatter otherYear = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+
+        return (year == currentYear)
+                ? deadlineDate.format(sameYear)
+                : deadlineDate.format(otherYear);
     }
 
     public TaskStatus getStatus() {

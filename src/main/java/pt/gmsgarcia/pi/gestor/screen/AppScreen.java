@@ -8,6 +8,7 @@ import pt.gmsgarcia.pi.gestor.task.Task;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.InputStream;
 
 public class AppScreen {
     static String title;
@@ -21,7 +22,7 @@ public class AppScreen {
 
     private static void init() {
         frame = new JFrame(title);
-        frame.setSize(800, 600);
+        frame.setSize(450, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new CardLayout());
         frame.setLocationRelativeTo(null);
@@ -43,6 +44,7 @@ public class AppScreen {
 
         frame.setVisible(true);
     }
+
 
     public static void showPanel(String name) {
         CardLayout cl = (CardLayout) content.getLayout();

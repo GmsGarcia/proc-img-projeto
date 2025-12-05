@@ -14,20 +14,18 @@ public class MainMenuPanel extends JPanel {
         gbc.gridx = 0;
 
         JLabel titleLabel = new JLabel("Main Menu");
-        titleLabel.setFont(new Font("Aria",Font.BOLD, 24));
+        titleLabel.setFont(new Font("Satoshi Variable Bold", Font.BOLD, 24));
         this.add(titleLabel, gbc);
 
-        JLabel welcomeLabel = new JLabel("Bem vindo!");
+        JLabel welcomeLabel = new JLabel("Welcome!");
         this.add(welcomeLabel, gbc);
 
-        JButton tasksButton = new JButton("Consultar tarefas");
+        JButton tasksButton = new JButton("Task List");
         tasksButton.addActionListener(e -> AppScreen.showPanel("Tasks"));
         this.add(tasksButton, gbc);
-        // opens TasksPanel
 
-        JButton aiButton = new JButton("Consultar agente");
+        JButton aiButton = new JButton("AI Agent");
         aiButton.addActionListener(e -> AppScreen.showPanel("Agent"));
         this.add(aiButton, gbc);
-        // opens AgentPanel
     }
 }

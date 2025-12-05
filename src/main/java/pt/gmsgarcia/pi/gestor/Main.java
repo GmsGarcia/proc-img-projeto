@@ -13,6 +13,8 @@ import pt.gmsgarcia.pi.gestor.task.TaskManager;
 import pt.gmsgarcia.pi.gestor.task.TaskStatus;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.InputStream;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -29,6 +31,21 @@ public class Main {
             UIManager.setLookAndFeel(new FlatMTGitHubDarkIJTheme());
         } catch (UnsupportedLookAndFeelException ex) {
             System.err.println("Failed to initialize LaF");
+        }
+
+        try {
+            InputStream is = Main.class.getResourceAsStream("/fonts/Satoshi-Variable.ttf");
+            Font satoshi = Font.createFont(Font.TRUETYPE_FONT, is);
+
+            satoshi = satoshi.deriveFont(Font.PLAIN, 16f);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(satoshi);
+
+            UIManager.put("Label.font", satoshi.deriveFont(16f));
+            UIManager.put("Button.font", satoshi.deriveFont(14f));
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         new AppScreen("todo app");
