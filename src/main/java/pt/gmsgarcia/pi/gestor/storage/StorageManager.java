@@ -13,7 +13,7 @@ public class StorageManager {
     public static HashMap<UUID, ArrayList<Task>> loadTasks()  {
         HashMap<UUID, ArrayList<Task>> all = new HashMap<>();
 
-        File dir = new File("tasks");
+        File dir = new File("data");
         if (!dir.exists()) return all;
 
         File[] files = dir.listFiles((d, name) -> name.endsWith(".yaml"));
