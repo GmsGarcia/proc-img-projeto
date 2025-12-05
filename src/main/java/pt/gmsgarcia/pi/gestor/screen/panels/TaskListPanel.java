@@ -1,6 +1,7 @@
 package pt.gmsgarcia.pi.gestor.screen.panels;
 
 import pt.gmsgarcia.pi.gestor.Main;
+import pt.gmsgarcia.pi.gestor.screen.AppScreen;
 import pt.gmsgarcia.pi.gestor.screen.components.Header;
 import pt.gmsgarcia.pi.gestor.screen.components.TaskListItem;
 import pt.gmsgarcia.pi.gestor.task.Task;
@@ -21,10 +22,17 @@ public class TaskListPanel extends JPanel {
         tasksList = new JPanel();
         tasksList.setLayout(new BoxLayout(tasksList, BoxLayout.Y_AXIS));
         JScrollPane scrollPane = new JScrollPane(tasksList);
-        scrollPane.setBorder(new EmptyBorder(0, 0, 0, 0));
+        scrollPane.setBorder(new EmptyBorder(0, 0, 50, 0));
         scrollPane.getVerticalScrollBar().setUnitIncrement(10);
         this.add(scrollPane, BorderLayout.CENTER);
 
+        JPanel bottom = new JPanel(new BorderLayout());
+        bottom.setBorder(new EmptyBorder(10, 10, 10, 10));
+        JButton create = new JButton("Add new task");
+        create.addActionListener(e -> AppScreen.showNewTaskPanel());
+
+        bottom.add(create);
+        this.add(bottom, BorderLayout.SOUTH);
         this.setContent();
     }
 
@@ -34,7 +42,11 @@ public class TaskListPanel extends JPanel {
         tasksList.removeAll();
 
         if (tasks.isEmpty()) {
-            tasksList.add(new JLabel("No tasks found.", SwingConstants.CENTER));
+            JLabel empty = new JLabel("No tasks found.");
+            empty.setAlignmentX(CENTER_ALIGNMENT);
+            empty.setBorder(new EmptyBorder(20, 15, 20, 15));
+
+            tasksList.add(empty);
         } else {
             for (Task task : tasks) {
                 tasksList.add(new TaskListItem(task));

@@ -1,33 +1,22 @@
 package pt.gmsgarcia.pi.gestor.screen.panels;
 
-import pt.gmsgarcia.pi.gestor.Main;
 import pt.gmsgarcia.pi.gestor.screen.components.Header;
-import pt.gmsgarcia.pi.gestor.screen.components.TaskListItem;
-import pt.gmsgarcia.pi.gestor.task.Task;
-import pt.gmsgarcia.pi.gestor.task.TaskManager;
+import raven.datetime.DatePicker;
+import raven.datetime.TimePicker;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.util.ArrayList;
 
-public class TaskListPanel extends JPanel {
-    private final JPanel tasksList;
-
-    public TaskListPanel() {
+public class NewTaskPanel extends JPanel {
+    public NewTaskPanel() {
         this.setLayout(new BorderLayout());
-        this.add(new Header("Tasks List", "MainMenu"), BorderLayout.NORTH);
-
-        tasksList = new JPanel();
-        tasksList.setLayout(new BoxLayout(tasksList, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(tasksList);
-        scrollPane.setBorder(new EmptyBorder(0, 0, 50, 0));
-        scrollPane.getVerticalScrollBar().setUnitIncrement(10);
-        this.add(scrollPane, BorderLayout.CENTER);
+        this.add(new Header("New Task", "Tasks"), BorderLayout.NORTH);
 
         JPanel bottom = new JPanel(new BorderLayout());
         bottom.setBorder(new EmptyBorder(10, 10, 10, 10));
-        JButton create = new JButton("Add new task");
+        JButton create = new JButton("Create Task");
 
         bottom.add(create);
         this.add(bottom, BorderLayout.SOUTH);
@@ -35,23 +24,72 @@ public class TaskListPanel extends JPanel {
     }
 
     public void setContent() {
-        ArrayList<Task> tasks = TaskManager.getTasks(Main.sampleUUID);
+        JPanel input = new JPanel();
+        input.setLayout(new BoxLayout(input, BoxLayout.Y_AXIS));
 
-        tasksList.removeAll();
+        // title
+        JPanel title = new JPanel(new BorderLayout());
+        title.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        if (tasks.isEmpty()) {
-            JLabel empty = new JLabel("No tasks found.");
-            empty.setAlignmentX(CENTER_ALIGNMENT);
-            empty.setBorder(new EmptyBorder(20, 15, 20, 15));
+        JLabel tLabel = new JLabel("Title:");
+        JTextField tInput = new JTextField();
+        tInput.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
 
-            tasksList.add(empty);
-        } else {
-            for (Task task : tasks) {
-                tasksList.add(new TaskListItem(task));
-            }
-        }
+        title.add(tLabel, BorderLayout.PAGE_START);
+        title.add(tInput, BorderLayout.CENTER);
 
-        tasksList.revalidate();
-        tasksList.repaint();
+        // priority
+        JPanel priority = new JPanel(new BorderLayout());
+        priority.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        JLabel pLabel = new JLabel("Priority:");
+        JTextField pInput = new JTextField();
+        pInput.setMaximumSize(new Dimension(Integer.MAX_VALUE, 100));
+
+        priority.add(pLabel, BorderLayout.PAGE_START);
+        priority.add(pInput, BorderLayout.CENTER);
+
+        JPanel deadline = new JPanel(new BorderLayout());
+        deadline.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        JLabel fLabel = new JLabel("Deadline:");
+
+        deadline.add(fLabel, BorderLayout.PAGE_START);
+        deadline.add(setupDeadlinePanel(), BorderLayout.CENTER);
+
+        // description
+        JPanel description = new JPanel(new BorderLayout());
+        description.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        JLabel dLabel = new JLabel("Description:");
+        JTextField dInput = new JTextField();
+
+        description.add(dLabel, BorderLayout.PAGE_START);
+        description.add(dInput, BorderLayout.CENTER);
+
+        input.add(title);
+        input.add(deadline);
+        input.add(priority);
+        input.add(description);
+
+        this.add(input, BorderLayout.CENTER);
+    }
+
+    private JPanel setupDeadlinePanel() {
+        JPanel deadline = new JPanel();
+
+        JFormattedTextField date = new JFormattedTextField();
+        JFormattedTextField time = new JFormattedTextField();
+
+        DatePicker dp = new DatePicker();
+        dp.setEditor(date);
+
+        TimePicker tp = new TimePicker();
+        tp.setEditor(time);
+
+        deadline.add(date);
+        deadline.add(time);
+
+        return deadline;
     }
 }

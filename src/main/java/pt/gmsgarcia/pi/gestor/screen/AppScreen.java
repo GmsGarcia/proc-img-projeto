@@ -1,9 +1,6 @@
 package pt.gmsgarcia.pi.gestor.screen;
 
-import pt.gmsgarcia.pi.gestor.screen.panels.AgentPanel;
-import pt.gmsgarcia.pi.gestor.screen.panels.MainMenuPanel;
-import pt.gmsgarcia.pi.gestor.screen.panels.TaskListPanel;
-import pt.gmsgarcia.pi.gestor.screen.panels.TaskInfoPanel;
+import pt.gmsgarcia.pi.gestor.screen.panels.*;
 import pt.gmsgarcia.pi.gestor.task.Task;
 
 import javax.swing.*;
@@ -62,5 +59,18 @@ public class AppScreen {
         content.add(detailPanel, "TaskDetail");
 
         showPanel("TaskDetail");
+    }
+
+    public static void showNewTaskPanel() {
+        for (Component comp : content.getComponents()) {
+            if (comp instanceof TaskInfoPanel) {
+                content.remove(comp);
+            }
+        }
+
+        NewTaskPanel createPanel = new NewTaskPanel();
+        content.add(createPanel, "NewTask");
+
+        showPanel("NewTask");
     }
 }

@@ -49,27 +49,6 @@ public class Main {
         }
 
         new AppScreen("todo app");
-
-        while (true) {
-            System.out.println("\nBem vindo!");
-            System.out.println("O que pretende fazer?");
-            System.out.println("1. Consultar tarefas");
-            System.out.println("2. Criar uma nova tarefa");
-            System.out.println("0. Sair");
-
-            switch (sc.nextInt()) {
-                case 1:
-                    displayTaskList(sc);
-                    break;
-                case 2:
-                    createNewTask();
-                    break;
-                case 3:
-                    break;
-                case 0:
-                    break;
-            }
-        }
     }
 
     public static void displayTaskList(Scanner sc) {
